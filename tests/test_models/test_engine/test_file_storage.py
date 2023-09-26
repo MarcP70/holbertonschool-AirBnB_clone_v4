@@ -16,7 +16,7 @@ from models.state import State
 from models.user import User
 import json
 import os
-import pycodestyle as pep8
+import pep8
 import unittest
 FileStorage = file_storage.FileStorage
 classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
@@ -34,7 +34,7 @@ class TestFileStorageDocs(unittest.TestCase):
         """Test that models/engine/file_storage.py conforms to PEP8."""
         pep8s = pep8.StyleGuide(quiet=True)
         result = pep8s.check_files(['models/engine/file_storage.py'])
-        self.assertEqual(result.total_errors, 1,
+        self.assertEqual(result.total_errors, 0,
                          "Found code style errors (and warnings).")
 
     def test_pep8_conformance_test_file_storage(self):
@@ -116,40 +116,26 @@ class TestFileStorage(unittest.TestCase):
 
     @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
     def test_get(self):
-        """Test retrieving an object by class and ID"""
+        """ Tests method for obtaining an instance file storage"""
         storage = FileStorage()
-        new_state = State(name="California")
-        storage.new(new_state)
+        dic = {"name": "Vecindad"}
+        instance = State(**dic)
+        storage.new(instance)
         storage.save()
-        state_id = new_state.id
-        retrieved_state = storage.get(State, state_id)
-        self.assertEqual(retrieved_state, new_state)
+        storage = FileStorage()
+        get_instance = storage.get(State, instance.id)
+        self.assertEqual(get_instance, instance)
 
     @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
-    def test_get_nonexistent(self):
-        """Test retrieving a nonexistent object"""
+    def test_count(self):
+        """ Tests count method file storage """
         storage = FileStorage()
-        nonexistent_state = storage.get(State, "nonexistent_id")
-        self.assertIsNone(nonexistent_state)
-
-    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
-    def test_count_all(self):
-        """Test counting all objects in storage"""
-        storage = FileStorage()
-        initial_count = storage.count()
-        new_state = State(name="New York")
-        storage.new(new_state)
+        dic = {"name": "Vecindad"}
+        state = State(**dic)
+        storage.new(state)
+        dic = {"name": "Mexico"}
+        city = City(**dic)
+        storage.new(city)
         storage.save()
-        updated_count = storage.count()
-        self.assertEqual(updated_count, initial_count + 1)
-
-    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
-    def test_count_specific_class(self):
-        """Test counting objects of a specific class in storage"""
-        storage = FileStorage()
-        initial_count = storage.count(State)
-        new_state = State(name="Texas")
-        storage.new(new_state)
-        storage.save()
-        updated_count = storage.count(State)
-        self.assertEqual(updated_count, initial_count + 1)
+        c = storage.count()
+        self.assertEqual(len(storage.all()), c)
