@@ -10,13 +10,10 @@ $(document).ready(function () {
     } else {
       delete selectedAmenities[amenityId];
     }
-
     $('#selected_amenities').text(Object.values(selectedAmenities).join(', '));
   });
 
   const apiUrlStatus = 'http://127.0.0.1:5001/api/v1/status/';
-
-  // Function to update API status
   const updateApiStatus = () => {
     $.ajax({
       type: 'GET',
@@ -35,15 +32,12 @@ $(document).ready(function () {
   };
 
   const apiUrlPlacesSearch = 'http://127.0.0.1:5001/api/v1/places_search/';
-
-  // Function to update places based on selected amenities
-  const updatePlaces = () => {
-    const amenitiesList = Object.keys(selectedAmenities);
+  const updatePlaces = (amenities) => {
     $.ajax({
       type: 'POST',
       url: apiUrlPlacesSearch,
       contentType: 'application/json',
-      data: JSON.stringify({ amenities: amenitiesList }),
+      data: JSON.stringify({ amenities: Object.keys(amenities) }),
       success: (data) => {
         displayPlaces(data);
       },
@@ -74,11 +68,10 @@ $(document).ready(function () {
     });
   };
 
-  // Initially update API status
   updateApiStatus();
+  updatePlaces(selectedAmenities);
 
-  // Handle button click for searching places
-  $('button').click(function() {
-    updatePlaces();
+  $('button').click(() => {
+    updatePlaces(selectedAmenities);
   });
 });
