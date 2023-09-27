@@ -5,24 +5,19 @@ $(document).ready(function () {
 
   // Function to update the selected amenities display
   const updateSelectedAmenities = () => {
-    $('#selected_amenities').text(Object.values(selectedAmenities).join(', '));
+    const amenityNames = Object.values(selectedAmenities).join(', ');
+    $('#selected_amenities').text(amenityNames);
   };
 
   // Function to update the selected locations display
-  const updateSelectedStates = () => {
-    const stateNames = Object.values(selectedStates).filter(Boolean).join(', ');
-    updateSelectedLocations(stateNames);
-  };
+  const updateSelectedLocations = () => {
+    const selectedLocationNames = [
+      ...Object.values(selectedStates),
+      ...Object.values(selectedCities)
+    ].join(', ');
 
-  const updateSelectedCities = () => {
-    const cityNames = Object.values(selectedCities).filter(Boolean).join(', ');
-    updateSelectedLocations(cityNames);
+    $('#selected_locations').text(selectedLocationNames);
   };
-
-  const updateSelectedLocations = (locations) => {
-    $('#selected_locations').text(locations);
-  };
-
 
   $('input[type=checkbox]').change(function () {
     const id = $(this).data('id');
@@ -40,7 +35,7 @@ $(document).ready(function () {
     }
 
     updateSelectedAmenities();
-    updateSelectedLocations();
+    updateSelectedLocations(); // Update selected locations when states or cities change
   });
 
   const apiUrlStatus = 'http://127.0.0.1:5001/api/v1/status/';
