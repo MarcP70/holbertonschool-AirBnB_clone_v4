@@ -291,4 +291,65 @@ Repo:
     GitHub repository: holbertonschool-AirBnB_clone_v4
     File: web_dynamic/4-hbnb.py, web_dynamic/templates/4-hbnb.html, web_dynamic/static/scripts/4-hbnb.js
 
-0/29 pts 
+0/29 pts
+6. States and Cities
+#advanced
+
+Now, reproduce the same steps with the State and City filter:
+
+Replace the route 4-hbnb to 100-hbnb in the file 100-hbnb.py (based on 4-hbnb.py)
+
+Create a new template 100-hbnb.html (based on 4-hbnb.html) and update it:
+
+    Import the JavaScript static/scripts/100-hbnb.js in the <head> tag (instead of 4-hbnb.js)
+    Add to all li tags of each state a new tag: <input type="checkbox">
+    Add to all li tags of each cities a new tag: <input type="checkbox">
+    The new checkbox must be at 10px on the left of the State or City name
+    Add to all input tags of each states (<li> tag) the attribute data-id=":state_id"
+    Add to all input tags of each states (<li> tag) the attribute data-name=":state_name"
+    Add to all input tags of each cities (<li> tag) the attribute data-id=":city_id"
+    Add to all input tags of each cities (<li> tag) the attribute data-name=":city_name"
+
+Write a JavaScript script (static/scripts/100-hbnb.js):
+
+    Based on 4-hbnb.js
+    Listen to changes on each input checkbox tag:
+        if the checkbox is checked, you must store the State or City ID in a variable (dictionary or list)
+        if the checkbox is unchecked, you must remove the State or City ID from the variable
+        update the h4 tag inside the div Locations with the list of States or Cities checked
+    When the button tag is clicked, a new POST request to places_search should be made with the list of Amenities, Cities and States checked
+
+Repo:
+
+    GitHub repository: holbertonschool-AirBnB_clone_v4
+    File: web_dynamic/100-hbnb.py, web_dynamic/templates/100-hbnb.html, web_dynamic/static/scripts/100-hbnb.js
+
+ 0/39 pts
+
+7. Reviews
+#advanced
+
+Let’s add a new feature: show and hide reviews!
+
+Replace the route 100-hbnb to 101-hbnb in the file 101-hbnb.py (based on 100-hbnb.py)
+
+Create a new template 101-hbnb.html (based on 100-hbnb.html) and update it:
+
+    Import the JavaScript static/scripts/101-hbnb.js in the <head> tag (instead of 101-hbnb.js)
+    Design the list of reviews from this task
+    Add a span element at the right of the H2 “Reviews” with value “show” (add all necessary attributes to do this feature)
+
+Write a JavaScript script (static/scripts/101-hbnb.js):
+
+    Based on 100-hbnb.js
+    When the span next to the Reviews h2 is clicked by the user:
+        Fetch, parse, display reviews and change the text to “hide”
+        If the text is “hide”: remove all Review elements from the DOM
+        This button should work like a toggle to fetch/display and hide reviews
+
+Repo:
+
+    GitHub repository: holbertonschool-AirBnB_clone_v4
+    File: web_dynamic/101-hbnb.py, web_dynamic/templates/101-hbnb.html, web_dynamic/static/scripts/101-hbnb.js
+
+ 0/24 pts
