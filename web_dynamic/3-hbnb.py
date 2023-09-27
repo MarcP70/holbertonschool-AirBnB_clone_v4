@@ -44,20 +44,6 @@ def hbnb():
                            cache_id=cache_id
                            )
 
-@app.route('/api/v1/places_search/', methods=['POST'])
-def places_search():
-    """ Search for places """
-    data = request.get_json()
-
-    places = storage.all(Place).values()
-    places = sorted(places, key=lambda k: k.name)
-
-    places_list = []
-    for place in places:
-        places_list.append(place.to_dict())
-
-    return jsonify(places_list)
-
 if __name__ == "__main__":
     """ Main Function """
     app.run(host='0.0.0.0', port=5000)
