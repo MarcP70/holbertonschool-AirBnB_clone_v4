@@ -54,6 +54,15 @@ button:hover {
     border-right: 1px solid #DDDDDD;
 }
 
+.locations h4 {
+    color: #FF5A5F;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+    height: 20px;
+}
+
 .amenities {
     height: 100%;
     width: 25%;
@@ -93,8 +102,30 @@ button:hover {
     margin: 0px;
 }
 
+.locations .popover ul {
+    margin: 0px;
+}
+
+.amenities .popover ul li h2 {
+    display: flex;
+    align-items: center;
+}
+
+.locations .popover ul li h2 {
+    display: flex;
+    align-items: center;
+}
+
+.amenities .popover ul li h2 input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.locations .popover ul li h2 input[type="checkbox"] {
+    margin-right: 10px;
+}
+
 .locations .popover {
-    margin-top: 0%;
+    margin-top: -3px;
 }
 
 .popover ul {
